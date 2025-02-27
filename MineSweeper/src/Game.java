@@ -2,6 +2,9 @@ public class Game {
 
     public void startGame(){
 
+        new Board().fillMineField();
+        new Board().hints();
+
     }
     /*
     * class screen (print boardPlayed, print win & error msg, print boardHidden when win)
