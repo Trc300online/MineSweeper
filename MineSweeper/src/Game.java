@@ -2,8 +2,7 @@ public class Game {
 
     public void startGame(){
 
-        new Board().fillMineField();
-        new Board().hints();
+
 
     }
     /*

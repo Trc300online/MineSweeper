@@ -1,4 +1,13 @@
-import java.util.Arrays;
+public class Board {
+    public static Tile[][] gameBoard;
+
+
+
+}
+
+
+
+/*import java.util.Arrays;
 import java.util.Random;
 
 public class Board {
@@ -49,7 +58,7 @@ public class Board {
         int count = 0;
         for (int i = 0; i < columns; i++){
             for (int j = 0; j < rows; j++){
-
+                boardBAround[i][j] = getAround();
             }
         }
 
@@ -96,3 +105,4 @@ public class Board {
     }
 
 }
+*/
