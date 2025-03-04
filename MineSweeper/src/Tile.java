@@ -7,7 +7,6 @@ public class Tile {
     public int bombAround;
 
     public Tile(){
-        Tile tile = new Tile();
     }
 
     public void Tiles(boolean isRevealed, boolean isBomb, boolean isFlagged, int bombAround) {
@@ -15,6 +14,18 @@ public class Tile {
         this.isBomb = isBomb;
         this.isFlagged = isFlagged;
         this.isRevealed = isRevealed;
+    }
+
+    public void areRevealed(){
+        isRevealed = false;
+    }
+
+    public void setBomb(){
+        isBomb = true;
+    }
+
+    public int bAround(){
+        return bombAround;
     }
 
 }

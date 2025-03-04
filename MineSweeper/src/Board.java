@@ -1,7 +1,50 @@
+import java.util.Random;
+
 public class Board {
+    public int columns = 10;
+    public int rows = 10;
     public static Tile[][] gameBoard;
 
+    public Board(){
+        gameBoard = new Tile[columns][rows];
+    }
 
+    public void createBoard(){
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < rows; j++) {
+                gameBoard[i][j] = new Tile();
+                gameBoard[i][j].areRevealed();
+            }
+        }
+    }
+
+    public void placeBombs(Tile[][] gameBoard) {
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < rows; j++) {
+                if (randomFill() == 2) {
+                    gameBoard[i][j].setBomb();
+                }
+            }
+        }
+    }
+
+    public int randomFill(){
+        return new Random().nextInt(3);
+    }
+    
+    public void countBombAround(){
+        for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < rows; j++) {
+                if (gameBoard[i][j].isBomb) {
+                    count();
+                }
+            }
+        }
+    }
+
+    public void count(){
+        
+    }
 
 }
 
