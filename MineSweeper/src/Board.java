@@ -1,15 +1,15 @@
 import java.util.Random;
 
 public class Board {
-    public int columns = 10;
-    public int rows = 10;
+    public static int columns = Screen.getColumnCords();
+    public static int rows = Screen.getRowCords();
     public static Tile[][] gameBoard;
 
     public Board(){
         gameBoard = new Tile[columns][rows];
     }
 
-    public void createBoard(){
+    public static void createBoard(){
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
                 gameBoard[i][j] = new Tile();
@@ -43,7 +43,7 @@ public class Board {
     }
 
     public void count(){
-        
+        //primer fer class screen per tenir les cords de les posicions.
     }
 
 }

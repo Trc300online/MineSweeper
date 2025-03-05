@@ -2,7 +2,8 @@ public class Game {
 
     public void startGame(){
 
-
+        Board.createBoard();
+        Screen.printBoard();
 
     }
     /*
