@@ -13,11 +13,7 @@ public class Tile {
         this.bombAround = bombAround;
         this.isBomb = isBomb;
         this.isFlagged = isFlagged;
-        this.isRevealed = isRevealed;
-    }
-
-    public void areRevealed(){
-        isRevealed = false;
+        this.isRevealed = false;
     }
 
     public void setBomb(){

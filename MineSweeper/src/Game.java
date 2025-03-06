@@ -2,8 +2,32 @@ public class Game {
 
     public void startGame(){
 
-        Board.createBoard();
-        Screen.printBoard();
+        Board gameBoard = new Board();
+        Screen.printBoard(gameBoard);
+        /*
+        while(gameContinues) {
+            screen ask move;
+            if (gameBoard[move][move].isRevealed == false && gameBoard[move][move].isBomb == true){
+                gameOver();(gameContinue == false)
+            }
+            if (gameBoard[move][move].isRevealed == false && gameBoard[move][move].isBomb == false){
+                reveal();(gameContinue == true)
+            }
+            (winCond)-->
+            for (int i = 0; i < columns; i++){
+                for (int j = 0; j < rows; j++){
+                    if  (gameBoard[move][move].isRevealed
+                    || gameBoard[move][move].isBomb){
+                        int count += 1;
+                        if  (count == columns * rows) {
+                            winMsg();
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        */
 
     }
     /*

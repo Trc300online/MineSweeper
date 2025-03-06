@@ -18,11 +18,12 @@ public class Screen {
         return columnCords;
     }
 
-    public static void printBoard(){
-        for (int i = 0; i < Board.columns; i++){
-            for (int j = 0; j < Board.rows; j++){
-                System.out.println(Board.gameBoard[i][j]);
+    public static void printBoard(Board gameboard){
+        for (int i = 0; i < gameboard.columns; i++){
+            for (int j = 0; j < gameboard.rows; j++){
+                System.out.print(gameboard.gameBoard[i][j] + " ");
             }
+            System.out.println();
         }
     }
 

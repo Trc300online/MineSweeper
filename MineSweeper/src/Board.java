@@ -1,19 +1,15 @@
 import java.util.Random;
 
 public class Board {
-    public static int columns = Screen.getColumnCords();
-    public static int rows = Screen.getRowCords();
-    public static Tile[][] gameBoard;
+    public int columns = Screen.getColumnCords();
+    public int rows = Screen.getRowCords();
+    public Tile[][] gameBoard;
 
     public Board(){
         gameBoard = new Tile[columns][rows];
-    }
-
-    public static void createBoard(){
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
                 gameBoard[i][j] = new Tile();
-                gameBoard[i][j].areRevealed();
             }
         }
     }
