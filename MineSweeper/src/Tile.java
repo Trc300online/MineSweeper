@@ -20,8 +20,19 @@ public class Tile {
         isBomb = true;
     }
 
-    public int bAround(){
+    public int totalBombsAround(){
         return bombAround;
     }
 
+    @Override
+    public String toString() {
+        if (!isRevealed) {
+            return " #";
+        }else if (isFlagged) {
+            return " P";
+        } else if (isBomb) {
+            return " X";
+        }
+        return " " + totalBombsAround();
+    }
 }

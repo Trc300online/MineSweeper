@@ -21,7 +21,7 @@ public class Screen {
     public static void printBoard(Board gameboard){
         for (int i = 0; i < gameboard.columns; i++){
             for (int j = 0; j < gameboard.rows; j++){
-                System.out.print(gameboard.gameBoard[i][j] + " ");
+                System.out.print(gameboard.gameBoard[i][j]);
             }
             System.out.println();
         }

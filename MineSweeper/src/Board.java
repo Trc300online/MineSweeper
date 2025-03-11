@@ -15,17 +15,17 @@ public class Board {
     }
 
     public void placeBombs(Tile[][] gameBoard) {
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < rows; j++) {
-                if (randomFill() == 2) {
-                    gameBoard[i][j].setBomb();
-                }
+        int bombas = (columns * rows)/3;
+        int count = 0;
+
+        while (count != bombas) {
+            int k = new Random().nextInt(columns);
+            int l = new Random().nextInt(rows);
+            if (!gameBoard[k][l].isBomb) {
+                gameBoard[k][l].setBomb();
+                count++;
             }
         }
-    }
-
-    public int randomFill(){
-        return new Random().nextInt(3);
     }
     
     public void countBombAround(){
@@ -41,6 +41,18 @@ public class Board {
     public void count(){
         //primer fer class screen per tenir les cords de les posicions.
     }
+
+    public boolean gameOver(){
+        if (!gameBoard[Screen.getColumnCords()][Screen.getRowCords()].isRevealed
+                && gameBoard[Screen.getColumnCords()][Screen.getRowCords()].isBomb) {
+
+        }
+        return true;
+    }
+
+    /*public static boolean gameOver(){
+        return false;
+    }*/
 
 }
 

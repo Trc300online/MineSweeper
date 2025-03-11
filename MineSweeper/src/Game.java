@@ -1,33 +1,41 @@
 public class Game {
 
-    public void startGame(){
+    public void startGame() {
 
-        Board gameBoard = new Board();
-        Screen.printBoard(gameBoard);
-        /*
-        while(gameContinues) {
-            screen ask move;
-            if (gameBoard[move][move].isRevealed == false && gameBoard[move][move].isBomb == true){
-                gameOver();(gameContinue == false)
+        Board board = new Board();
+        board.placeBombs(board.gameBoard);
+        Screen.printBoard(board);
+
+
+        boolean gameContinues;
+        while (gameContinues) {
+            int col = Screen.getColumnCords();
+            int row = Screen.getRowCords();
+            if (Board.gameOver()){
+                gameContinues = false;
             }
-            if (gameBoard[move][move].isRevealed == false && gameBoard[move][move].isBomb == false){
-                reveal();(gameContinue == true)
+            if (!Board.gameBoard[col][row].isRevealed && Board.gameBoard[col][row].isBomb) {
+                gameContinues = Board.gameOver();
             }
-            (winCond)-->
-            for (int i = 0; i < columns; i++){
-                for (int j = 0; j < rows; j++){
-                    if  (gameBoard[move][move].isRevealed
-                    || gameBoard[move][move].isBomb){
-                        int count += 1;
-                        if  (count == columns * rows) {
-                            winMsg();
+            if (!Board.gameBoard[col][row].isRevealed && !Board.gameBoard[col][row].isBomb) {
+                reveal();
+                (gameContinues == true)
+            }
+            (Board.gameWin() / winCond)-- >
+            for (int i = 0; i < columns; i++) {
+                for (int j = 0; j < rows; j++) {
+                    if (board[move][move].isRevealed
+                            || board[move][move].isBomb) {
+                        int count +=1;
+                        if (count == columns * rows) {
+                            Screen.winMsg();
                         }
                     }
                     break;
                 }
             }
         }
-        */
+
 
     }
     /*
