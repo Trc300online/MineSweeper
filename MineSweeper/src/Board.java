@@ -1,26 +1,29 @@
 import java.util.Random;
 
 public class Board {
-    public int columns = Screen.getColumnCords();
-    public int rows = Screen.getRowCords();
+    public int columnsPrint = Screen.getColumnPrintCords();
+    public int rowsPrint = Screen.getRowPrintCords();
+
+    //public int columns = Screen.getColumnCords();
+    //public int rows = Screen.getRowCords();
     public Tile[][] gameBoard;
 
     public Board(){
-        gameBoard = new Tile[columns][rows];
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < rows; j++) {
+        gameBoard = new Tile[columnsPrint][rowsPrint];
+        for (int i = 0; i < columnsPrint; i++) {
+            for (int j = 0; j < rowsPrint; j++) {
                 gameBoard[i][j] = new Tile();
             }
         }
     }
 
     public void placeBombs(Tile[][] gameBoard) {
-        int bombas = (columns * rows)/3;
+        int bombas = (columnsPrint * rowsPrint)/3;
         int count = 0;
 
         while (count != bombas) {
-            int k = new Random().nextInt(columns);
-            int l = new Random().nextInt(rows);
+            int k = new Random().nextInt(columnsPrint);
+            int l = new Random().nextInt(rowsPrint);
             if (!gameBoard[k][l].isBomb) {
                 gameBoard[k][l].setBomb();
                 count++;
@@ -29,25 +32,45 @@ public class Board {
     }
     
     public void countBombAround(){
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < columnsPrint; i++) {
+            for (int j = 0; j < rowsPrint; j++) {
                 if (gameBoard[i][j].isBomb) {
-                    count();
+                    addNeighbours(i, j);
                 }
             }
         }
     }
 
-    public void count(){
+    public void addNeighbours(int columns, int rows){
+        
         //primer fer class screen per tenir les cords de les posicions.
     }
 
-    public boolean gameOver(){
-        if (!gameBoard[Screen.getColumnCords()][Screen.getRowCords()].isRevealed
-                && gameBoard[Screen.getColumnCords()][Screen.getRowCords()].isBomb) {
+    public boolean gameOver(int columns, int rows){
+        if (!gameBoard[columns][rows].isRevealed
+                && gameBoard[columns][rows].isBomb) {
+            return true;
 
         }
-        return true;
+        return false;
+    }
+
+    public boolean quit() {
+        return false;
+    }
+
+    public boolean revealable(int columns, int rows) {
+        if (!gameBoard[columns][rows].isRevealed) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean flaggeable(int columns, int rows) {
+        if (!gameBoard[columns][rows].isRevealed) {
+            return true;
+        }
+        return false;
     }
 
     /*public static boolean gameOver(){

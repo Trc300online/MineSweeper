@@ -6,37 +6,42 @@ public class Game {
         board.placeBombs(board.gameBoard);
         Screen.printBoard(board);
 
-
-        boolean gameContinues;
+        boolean gameContinues = true;
         while (gameContinues) {
-            int col = Screen.getColumnCords();
-            int row = Screen.getRowCords();
-            if (Board.gameOver()){
-                gameContinues = false;
+            char action = Screen.askAction();
+            if (action == 'Q' || action == 'q') {
+                gameContinues = board.quit();
             }
-            if (!Board.gameBoard[col][row].isRevealed && Board.gameBoard[col][row].isBomb) {
-                gameContinues = Board.gameOver();
-            }
-            if (!Board.gameBoard[col][row].isRevealed && !Board.gameBoard[col][row].isBomb) {
-                reveal();
-                (gameContinues == true)
-            }
-            (Board.gameWin() / winCond)-- >
-            for (int i = 0; i < columns; i++) {
-                for (int j = 0; j < rows; j++) {
-                    if (board[move][move].isRevealed
-                            || board[move][move].isBomb) {
-                        int count +=1;
-                        if (count == columns * rows) {
-                            Screen.winMsg();
+            if (action == 'R' || action == 'r'){
+                int columns = Screen.getColumnCords();
+                int rows = Screen.getRowCords();
+                if (board.gameOver(columns, rows)){
+                    gameContinues = false;
+                } if (board.revealable(columns, rows)) {
+                    board.gameBoard[columns][rows].reveal();
+                    Screen.printBoard(board);
+                }/*
+                (Board.gameWin() / winCond)-- >
+                for (int i = 0; i < columns; i++) {
+                    for (int j = 0; j < rows; j++) {
+                        if (board[move][move].isRevealed
+                                || board[move][move].isBomb) {
+                            int count +=1;
+                            if (count == columns * rows) {
+                                Screen.winMsg();
+                            }
                         }
+                        break;
                     }
-                    break;
+                }*/
+            } else if (action == 'F' || action == 'f') {
+                int columns = Screen.getColumnCords();
+                int rows = Screen.getRowCords();
+                if (board.flaggeable(columns, rows)) {
+                    board.gameBoard[columns][rows].toggleFlag();
                 }
             }
         }
-
-
     }
     /*
     * class screen (print boardPlayed, print win & error msg, print boardHidden when win)

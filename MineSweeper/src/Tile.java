@@ -24,6 +24,14 @@ public class Tile {
         return bombAround;
     }
 
+    public void toggleFlag() {
+        this.isFlagged = !isFlagged;
+    }
+
+    public void reveal() {
+        this.isRevealed = true;
+    }
+
     @Override
     public String toString() {
         if (!isRevealed) {
