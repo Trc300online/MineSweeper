@@ -34,10 +34,10 @@ public class Tile {
 
     @Override
     public String toString() {
-        if (!isRevealed) {
-            return " #";
-        }else if (isFlagged) {
+        if (isFlagged) {
             return " P";
+        }else if (!isRevealed) {
+            return " #";
         } else if (isBomb) {
             return " X";
         }

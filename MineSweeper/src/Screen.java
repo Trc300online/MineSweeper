@@ -35,8 +35,8 @@ public class Screen {
     }
 
     public static void printBoard(Board gameboard){
-        for (int i = 0; i < gameboard.columnsPrint; i++){
-            for (int j = 0; j < gameboard.rowsPrint; j++){
+        for (int i = 0; i < gameboard.rowsPrint; i++){
+            for (int j = 0; j < gameboard.columnsPrint; j++){
                 System.out.print(gameboard.gameBoard[i][j]);
             }
             System.out.println();
@@ -50,5 +50,4 @@ public class Screen {
         action = getAction.next().charAt(0);
         return action;
     }
-
 }

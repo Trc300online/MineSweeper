@@ -4,10 +4,11 @@ public class Game {
 
         Board board = new Board();
         board.placeBombs(board.gameBoard);
-        Screen.printBoard(board);
+        board.countBombAround();
 
         boolean gameContinues = true;
         while (gameContinues) {
+            Screen.printBoard(board);
             char action = Screen.askAction();
             if (action == 'Q' || action == 'q') {
                 gameContinues = board.quit();
@@ -16,10 +17,11 @@ public class Game {
                 int columns = Screen.getColumnCords();
                 int rows = Screen.getRowCords();
                 if (board.gameOver(columns, rows)){
-                    gameContinues = false;
-                } if (board.revealable(columns, rows)) {
-                    board.gameBoard[columns][rows].reveal();
+                    board.revealAll();
                     Screen.printBoard(board);
+                    gameContinues = false;
+                } if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
+                    board.gameBoard[rows][columns].reveal();
                 }/*
                 (Board.gameWin() / winCond)-- >
                 for (int i = 0; i < columns; i++) {
@@ -37,8 +39,8 @@ public class Game {
             } else if (action == 'F' || action == 'f') {
                 int columns = Screen.getColumnCords();
                 int rows = Screen.getRowCords();
-                if (board.flaggeable(columns, rows)) {
-                    board.gameBoard[columns][rows].toggleFlag();
+                if (board.flaggeable(rows, columns)) {
+                    board.gameBoard[rows][columns].toggleFlag();
                 }
             }
         }
