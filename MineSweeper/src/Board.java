@@ -5,6 +5,7 @@ public class Board {
     public int rowsPrint = Screen.getRowPrintCords();
     public Tile[][] gameBoard;
 
+
     public Board(){
         gameBoard = new Tile[rowsPrint][columnsPrint];
         for (int i = 0; i < rowsPrint; i++) {
@@ -15,17 +16,17 @@ public class Board {
     }
 
     public void placeBombs(Tile[][] gameBoard) {
-        int bombas = (columnsPrint * rowsPrint)/3;
+        /*int bombas = (columnsPrint * rowsPrint)/3;
         int count = 0;
 
         while (count != bombas) {
             int k = new Random().nextInt(rowsPrint);
-            int l = new Random().nextInt(columnsPrint);
-            if (!gameBoard[k][l].isBomb) {
-                gameBoard[k][l].setBomb();
-                count++;
+            int l = new Random().nextInt(columnsPrint);*/
+            if (!gameBoard[2][0].isBomb) {
+                gameBoard[2][0].setBomb();
+                //count++;
             }
-        }
+        //}
     }
     
     public void countBombAround(){
@@ -38,58 +39,53 @@ public class Board {
         }
     }
 
-    public void addNeighbours(int columns, int rows){
-        if (validPosition(columns + 1, rows, gameBoard)) {
-            gameBoard[columns + 1][rows].bombAround += 1;
+    public void addNeighbours(int rows, int columns){
+        if (validPosition(rows + 1, columns, gameBoard)) {
+            gameBoard[rows + 1][columns].bombAround += 1;
         }
-        if (validPosition(columns + 1, rows + 1, gameBoard)) {
-            gameBoard[columns + 1][rows + 1].bombAround += 1;
+        if (validPosition(rows + 1, columns + 1, gameBoard)) {
+            gameBoard[rows + 1][columns + 1].bombAround += 1;
         }
-        if (validPosition(columns, rows + 1, gameBoard)) {
-            gameBoard[columns][rows + 1].bombAround += 1;
+        if (validPosition(rows, columns + 1, gameBoard)) {
+            gameBoard[rows][columns + 1].bombAround += 1;
         }
-        if (validPosition(columns - 1, rows + 1, gameBoard)) {
-            gameBoard[columns - 1][rows + 1].bombAround += 1;
+        if (validPosition(rows - 1, columns + 1, gameBoard)) {
+            gameBoard[rows - 1][columns + 1].bombAround += 1;
         }
-        if (validPosition(columns - 1, rows, gameBoard)) {
-            gameBoard[columns - 1][rows].bombAround += 1;
+        if (validPosition(rows - 1, columns, gameBoard)) {
+            gameBoard[rows - 1][columns].bombAround += 1;
         }
-        if (validPosition(columns - 1, rows - 1, gameBoard)) {
-            gameBoard[columns - 1][rows - 1].bombAround += 1;
+        if (validPosition(rows - 1, columns - 1, gameBoard)) {
+            gameBoard[rows - 1][columns - 1].bombAround += 1;
         }
-        if (validPosition(columns, rows - 1, gameBoard)) {
-            gameBoard[columns][rows - 1].bombAround += 1;
+        if (validPosition(rows, columns - 1, gameBoard)) {
+            gameBoard[rows][columns - 1].bombAround += 1;
         }
-        if (validPosition(columns + 1, rows - 1, gameBoard)) {
-            gameBoard[columns + 1][rows - 1].bombAround += 1;
+        if (validPosition(rows + 1, columns - 1, gameBoard)) {
+            gameBoard[rows + 1][columns - 1].bombAround += 1;
         }
     }
 
-    public boolean validPosition(int col, int row, Tile[][] gameBoard){
+    public boolean validPosition(int row, int col, Tile[][] gameBoard){
         return col >= 0 && col < gameBoard.length && row >= 0 && row < gameBoard[col].length;
     }
 
-    public boolean gameOver(int columns, int rows){
-        if (!gameBoard[columns][rows].isRevealed
-                && gameBoard[columns][rows].isBomb) {
-            return true;
-
-        }
-        return false;
+    public boolean gameOver(int rows, int columns){
+        return gameBoard[rows][columns].isBomb;
     }
 
     public boolean quit() {
         return false;
     }
 
-    public boolean revealable(int columns, int rows) {
+    public boolean revealable(int rows, int columns) {
         if (!gameBoard[columns][rows].isRevealed) {
             return true;
         }
         return false;
     }
 
-    public boolean flaggeable(int columns, int rows) {
+    public boolean flaggeable(int rows, int columns) {
         if (!gameBoard[columns][rows].isRevealed) {
             return true;
         }
@@ -99,84 +95,92 @@ public class Board {
     public void revealAll() {
         for (int i = 0; i < rowsPrint; i++) {
             for (int j = 0; j < columnsPrint; j++) {
-                gameBoard[j][i].isFlagged = false;
-                gameBoard[j][i].isRevealed = true;
+                gameBoard[i][j].isFlagged = false;
+                gameBoard[i][j].isRevealed = true;
             }
         }
     }
 
-    public void revealNeighbours(int columns, int rows){
-        if (gameBoard[columns][rows].bombAround == 0) {
-            if (validPosition(columns + 1, rows, gameBoard)) {
-                if (!gameBoard[columns + 1][rows].isBomb) {
-                    gameBoard[columns + 1][rows].reveal();
-                    if (gameBoard[columns + 1][rows].bombAround == 0) {
-                        revealNeighbours(columns + 1, rows);
-                    }
-                }
-            }
-            if (validPosition(columns + 1, rows + 1, gameBoard)) {
-                if (!gameBoard[columns + 1][rows + 1].isBomb) {
-                    gameBoard[columns + 1][rows + 1].reveal();
-                    if (gameBoard[columns + 1][rows + 1].bombAround == 0) {
-                        revealNeighbours(columns + 1, rows + 1);
-                    }
-                }
-            }
-            if (validPosition(columns, rows + 1, gameBoard)) {
-                if (!gameBoard[columns][rows + 1].isBomb) {
-                    gameBoard[columns][rows + 1].reveal();
-                    if (gameBoard[columns][rows + 1].bombAround == 0) {
-                        revealNeighbours(columns, rows + 1);
-                    }
-                }
-            }
-            if (validPosition(columns - 1, rows + 1, gameBoard)) {
-                if (!gameBoard[columns - 1][rows + 1].isBomb) {
-                    gameBoard[columns - 1][rows + 1].reveal();
-                    if (gameBoard[columns + 1][rows + 1].bombAround == 0) {
-                        revealNeighbours(columns - 1, rows + 1);
-                    }
-                }
-            }
-            if (validPosition(columns - 1, rows, gameBoard)) {
-                if (!gameBoard[columns - 1][rows].isBomb) {
-                    gameBoard[columns - 1][rows].reveal();
-                    if (gameBoard[columns - 1][rows].bombAround == 0) {
-                        revealNeighbours(columns - 1, rows);
-                    }
-                }
-            }
-            if (validPosition(columns - 1, rows - 1, gameBoard)) {
-                if (!gameBoard[columns - 1][rows - 1].isBomb) {
-                    gameBoard[columns - 1][rows - 1].reveal();
-                    if (gameBoard[columns - 1][rows - 1].bombAround == 0) {
-                        revealNeighbours(columns - 1, rows - 1);
-                    }
-                }
-            }
-            if (validPosition(columns, rows - 1, gameBoard)) {
-                if (!gameBoard[columns][rows - 1].isBomb) {
-                    gameBoard[columns][rows - 1].reveal();
-                    if (gameBoard[columns][rows - 1].bombAround == 0) {
-                        revealNeighbours(columns, rows - 1);
-                    }
-                }
-            }
-            if (validPosition(columns + 1, rows - 1, gameBoard)) {
-                if (!gameBoard[columns + 1][rows - 1].isBomb) {
-                    gameBoard[columns + 1][rows - 1].reveal();
-                    if (gameBoard[columns + 1][rows - 1].bombAround == 0) {
-                        revealNeighbours(columns + 1, rows - 1);
-                    }
-                }
-            }
-        }
-    }
+    public void revealNeighbours(int rows, int columns){
+        if (gameBoard[rows][columns].bombAround == 0) {
+            for ( int incFila = -1 ; incFila <= rowsPrint ; incFila++ )
+                for ( int incCol = -1 ; incCol <= columnsPrint ; incCol++ ){
+                    if (validPosition(rows + incFila, columns + incCol, gameBoard)
+                            && !gameBoard[rows + incFila][columns + incCol].isBomb) {
+                        gameBoard[rows + incFila][columns + incCol].reveal();
 
-    /*public static boolean gameOver(){
-        return false;
-    }*/
+                    }
+                }
+        }
+
+
+        /*if (gameBoard[rows][columns].bombAround == 0) {
+            if (validPosition(rows + 1, columns, gameBoard)) {
+                if (!gameBoard[rows + 1][columns].isBomb) {
+                    gameBoard[rows + 1][columns].reveal();
+                    if (gameBoard[rows + 1][columns].bombAround == 0) {
+                        revealNeighbours(rows + 1, columns);
+                    }
+                }
+            }
+            if (validPosition(rows + 1, columns + 1, gameBoard)) {
+                if (!gameBoard[rows + 1][columns + 1].isBomb) {
+                    gameBoard[rows + 1][columns + 1].reveal();
+                    if (gameBoard[rows + 1][columns + 1].bombAround == 0) {
+                        revealNeighbours(rows + 1, columns + 1);
+                    }
+                }
+            }
+            if (validPosition(rows, columns + 1, gameBoard)) {
+                if (!gameBoard[rows][columns + 1].isBomb) {
+                    gameBoard[rows][columns + 1].reveal();
+                    if (gameBoard[rows][columns + 1].bombAround == 0) {
+                        revealNeighbours(rows, columns + 1);
+                    }
+                }
+            }
+            if (validPosition(rows - 1, columns + 1, gameBoard)) {
+                if (!gameBoard[rows - 1][columns + 1].isBomb) {
+                    gameBoard[rows - 1][columns + 1].reveal();
+                    if (gameBoard[rows - 1][columns + 1].bombAround == 0) {
+                        revealNeighbours(rows - 1, columns + 1);
+                    }
+                }
+            }
+            if (validPosition(rows - 1, columns, gameBoard)) {
+                if (!gameBoard[rows - 1][columns].isBomb) {
+                    gameBoard[rows - 1][columns].reveal();
+                    if (gameBoard[rows - 1][columns].bombAround == 0) {
+                        revealNeighbours(rows - 1, columns);
+                    }
+                }
+            }
+            if (validPosition(rows - 1, columns - 1, gameBoard)) {
+                if (!gameBoard[rows - 1][columns - 1].isBomb) {
+                    gameBoard[rows - 1][columns - 1].reveal();
+                    if (gameBoard[rows - 1][columns - 1].bombAround == 0) {
+                        revealNeighbours(rows - 1, columns - 1);
+                    }
+                }
+            }
+            if (validPosition(rows, columns - 1, gameBoard)) {
+                if (!gameBoard[rows][columns - 1].isBomb) {
+                    gameBoard[rows][columns - 1].reveal();
+                    if (gameBoard[rows][columns - 1].bombAround == 0) {
+                        revealNeighbours(rows, columns - 1);
+                    }
+                }
+            }
+            if (validPosition(rows + 1, columns - 1, gameBoard)) {
+                if (!gameBoard[rows + 1][columns - 1].isBomb) {
+                    gameBoard[rows + 1][columns - 1].reveal();
+                    if (gameBoard[rows + 1][columns - 1].bombAround == 0) {
+                        revealNeighbours(rows + 1, columns - 1);
+                    }
+                }
+            }
+        }*/
+    }
 
 }
 

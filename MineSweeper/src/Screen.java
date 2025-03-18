@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Screen {
 
-    public static int getRowCords(){
+    public static int getColumnCords(){
         int rowCords;
         Scanner scanner2 = new Scanner(System.in);
-        System.out.println("Row: ");
+        System.out.println("Column: ");
         rowCords = Integer.parseInt(scanner2.next()) - 1;
         return rowCords;
     }
@@ -18,10 +18,10 @@ public class Screen {
         return rowCords;
     }
 
-    public static int getColumnCords(){
+    public static int getRowCords(){
         int columnCords;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Column: ");
+        System.out.println("Row: ");
         columnCords = Integer.parseInt(scanner.next()) - 1;
         return columnCords;
     }

@@ -16,10 +16,10 @@ public class Game {
             if (action == 'R' || action == 'r'){
                 int columns = Screen.getColumnCords();
                 int rows = Screen.getRowCords();
-                if (board.gameOver(columns, rows)){
+                if (board.gameOver(rows, columns)){
                     board.revealAll();
                     Screen.printBoard(board);
-                    gameContinues = false;
+                    break;
                 } if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
                     board.gameBoard[rows][columns].reveal();
                     board.revealNeighbours(columns, rows);
