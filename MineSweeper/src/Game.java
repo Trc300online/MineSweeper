@@ -22,6 +22,7 @@ public class Game {
                     gameContinues = false;
                 } if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
                     board.gameBoard[rows][columns].reveal();
+                    board.revealNeighbours(columns, rows);
                 }/*
                 (Board.gameWin() / winCond)-- >
                 for (int i = 0; i < columns; i++) {

@@ -105,6 +105,75 @@ public class Board {
         }
     }
 
+    public void revealNeighbours(int columns, int rows){
+        if (gameBoard[columns][rows].bombAround == 0) {
+            if (validPosition(columns + 1, rows, gameBoard)) {
+                if (!gameBoard[columns + 1][rows].isBomb) {
+                    gameBoard[columns + 1][rows].reveal();
+                    if (gameBoard[columns + 1][rows].bombAround == 0) {
+                        revealNeighbours(columns + 1, rows);
+                    }
+                }
+            }
+            if (validPosition(columns + 1, rows + 1, gameBoard)) {
+                if (!gameBoard[columns + 1][rows + 1].isBomb) {
+                    gameBoard[columns + 1][rows + 1].reveal();
+                    if (gameBoard[columns + 1][rows + 1].bombAround == 0) {
+                        revealNeighbours(columns + 1, rows + 1);
+                    }
+                }
+            }
+            if (validPosition(columns, rows + 1, gameBoard)) {
+                if (!gameBoard[columns][rows + 1].isBomb) {
+                    gameBoard[columns][rows + 1].reveal();
+                    if (gameBoard[columns][rows + 1].bombAround == 0) {
+                        revealNeighbours(columns, rows + 1);
+                    }
+                }
+            }
+            if (validPosition(columns - 1, rows + 1, gameBoard)) {
+                if (!gameBoard[columns - 1][rows + 1].isBomb) {
+                    gameBoard[columns - 1][rows + 1].reveal();
+                    if (gameBoard[columns + 1][rows + 1].bombAround == 0) {
+                        revealNeighbours(columns - 1, rows + 1);
+                    }
+                }
+            }
+            if (validPosition(columns - 1, rows, gameBoard)) {
+                if (!gameBoard[columns - 1][rows].isBomb) {
+                    gameBoard[columns - 1][rows].reveal();
+                    if (gameBoard[columns - 1][rows].bombAround == 0) {
+                        revealNeighbours(columns - 1, rows);
+                    }
+                }
+            }
+            if (validPosition(columns - 1, rows - 1, gameBoard)) {
+                if (!gameBoard[columns - 1][rows - 1].isBomb) {
+                    gameBoard[columns - 1][rows - 1].reveal();
+                    if (gameBoard[columns - 1][rows - 1].bombAround == 0) {
+                        revealNeighbours(columns - 1, rows - 1);
+                    }
+                }
+            }
+            if (validPosition(columns, rows - 1, gameBoard)) {
+                if (!gameBoard[columns][rows - 1].isBomb) {
+                    gameBoard[columns][rows - 1].reveal();
+                    if (gameBoard[columns][rows - 1].bombAround == 0) {
+                        revealNeighbours(columns, rows - 1);
+                    }
+                }
+            }
+            if (validPosition(columns + 1, rows - 1, gameBoard)) {
+                if (!gameBoard[columns + 1][rows - 1].isBomb) {
+                    gameBoard[columns + 1][rows - 1].reveal();
+                    if (gameBoard[columns + 1][rows - 1].bombAround == 0) {
+                        revealNeighbours(columns + 1, rows - 1);
+                    }
+                }
+            }
+        }
+    }
+
     /*public static boolean gameOver(){
         return false;
     }*/
