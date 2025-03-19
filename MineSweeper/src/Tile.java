@@ -7,12 +7,9 @@ public class Tile {
     public int bombAround;
 
     public Tile(){
-    }
-
-    public void Tiles(boolean isRevealed, boolean isBomb, boolean isFlagged, int bombAround) {
-        this.bombAround = bombAround;
-        this.isBomb = isBomb;
-        this.isFlagged = isFlagged;
+        this.bombAround = 0;
+        this.isBomb = false;
+        this.isFlagged = false;
         this.isRevealed = false;
     }
 
