@@ -19,6 +19,7 @@ public class Game {
                 if (board.gameOver(rows, columns)){
                     board.revealAll();
                     Screen.printBoard(board);
+                    Screen.gameOverMsg();
                     break;
                 } if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
                     board.gameBoard[rows][columns].reveal();

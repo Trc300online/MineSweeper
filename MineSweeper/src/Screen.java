@@ -50,4 +50,8 @@ public class Screen {
         action = getAction.next().charAt(0);
         return action;
     }
+
+    public static void gameOverMsg() {
+        System.out.println("Heu trepitjat una mina, mala sort!!");
+    }
 }
