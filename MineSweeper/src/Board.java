@@ -6,7 +6,7 @@ public class Board {
     public Tile[][] gameBoard;
 
 
-    public Board(){
+    public Board() {
         gameBoard = new Tile[rowsPrint][columnsPrint];
         for (int i = 0; i < rowsPrint; i++) {
             for (int j = 0; j < columnsPrint; j++) {
@@ -22,14 +22,14 @@ public class Board {
         while (count != bombas) {
             int k = new Random().nextInt(rowsPrint);
             int l = new Random().nextInt(columnsPrint);*/
-            if (!gameBoard[2][0].isBomb) {
-                gameBoard[2][0].setBomb();
-                //count++;
-            }
+        if (!gameBoard[2][0].isBomb) {
+            gameBoard[2][0].setBomb();
+            //count++;
+        }
         //}
     }
-    
-    public void countBombAround(){
+
+    public void countBombAround() {
         for (int i = 0; i < rowsPrint; i++) {
             for (int j = 0; j < columnsPrint; j++) {
                 if (gameBoard[i][j].isBomb) {
@@ -39,7 +39,7 @@ public class Board {
         }
     }
 
-    public void addNeighbours(int rows, int columns){
+    public void addNeighbours(int rows, int columns) {
         if (validPosition(rows + 1, columns, gameBoard)) {
             gameBoard[rows + 1][columns].bombAround += 1;
         }
@@ -66,11 +66,11 @@ public class Board {
         }
     }
 
-    public boolean validPosition(int row, int col, Tile[][] gameBoard){
+    public boolean validPosition(int row, int col, Tile[][] gameBoard) {
         return col >= 0 && col < gameBoard.length && row >= 0 && row < gameBoard[col].length;
     }
 
-    public boolean gameOver(int rows, int columns){
+    public boolean gameOver(int rows, int columns) {
         return gameBoard[rows][columns].isBomb;
     }
 
@@ -91,7 +91,7 @@ public class Board {
         }
         return false;
     }
-    
+
     public void revealAll() {
         for (int i = 0; i < rowsPrint; i++) {
             for (int j = 0; j < columnsPrint; j++) {
@@ -101,19 +101,30 @@ public class Board {
         }
     }
 
-    public void revealNeighbours(int rows, int columns){
+    public void revealNeighbours(int rows, int columns) {
         if (gameBoard[rows][columns].bombAround == 0) {
-            for ( int incFila = -1 ; incFila <= rowsPrint ; incFila++ )
-                for ( int incCol = -1 ; incCol <= columnsPrint ; incCol++ ){
-                    if (validPosition(rows + incFila, columns + incCol, gameBoard)
-                            && !gameBoard[rows + incFila][columns + incCol].isBomb) {
-                        gameBoard[rows + incFila][columns + incCol].reveal();
+            for (int incFila = -1; incFila <= 1; incFila++) {
+                for (int incCol = -1; incCol <= 1; incCol++) {
+                    int newRow = rows + incFila;
+                    int newCol = columns + incCol;
 
+                    if (validPosition(newRow, newCol, gameBoard)
+                            && !gameBoard[newRow][newCol].isBomb
+                            && !gameBoard[newRow][newCol].isRevealed) {
+
+                        gameBoard[newRow][newCol].reveal();
+
+
+                        if (gameBoard[newRow][newCol].bombAround == 0) {
+                            revealNeighbours(newRow, newCol);
+
+                        }
                     }
                 }
+            }
         }
-
-
+    }
+}
         /*if (gameBoard[rows][columns].bombAround == 0) {
             if (validPosition(rows + 1, columns, gameBoard)) {
                 if (!gameBoard[rows + 1][columns].isBomb) {
@@ -180,9 +191,7 @@ public class Board {
                 }
             }
         }*/
-    }
 
-}
 
 
 
