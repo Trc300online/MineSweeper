@@ -29,6 +29,7 @@ public class Game {
                         board.revealAll();
                         Screen.printBoard(board);
                         Screen.gameOverMsg();
+                        gameContinues = false;
                         break;
                     }
                     if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
@@ -39,7 +40,7 @@ public class Game {
                         if (board.winCond(rows, columns)) {
                             Screen.printBoard(board);
                             Screen.winMsg();
-                            break;
+                            gameContinues = false;
                         }
                     }
                     break;
