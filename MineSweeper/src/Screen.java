@@ -50,4 +50,8 @@ public class Screen {
         action = getAction.next().charAt(0);
         return action;
     }
+
+    public static void winMsg() {
+        System.out.println("Vicotria!! heu marcat totes les mines!!");
+    }
 }

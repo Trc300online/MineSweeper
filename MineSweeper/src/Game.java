@@ -20,23 +20,17 @@ public class Game {
                     board.revealAll();
                     Screen.printBoard(board);
                     break;
-                } if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
+                }
+                if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
                     board.gameBoard[rows][columns].reveal();
                     board.revealNeighbours(rows, columns);
-                }/*
-                (Board.gameWin() / winCond)-- >
-                for (int i = 0; i < columns; i++) {
-                    for (int j = 0; j < rows; j++) {
-                        if (board[move][move].isRevealed
-                                || board[move][move].isBomb) {
-                            int count +=1;
-                            if (count == columns * rows) {
-                                Screen.winMsg();
-                            }
-                        }
+                    if (board.winCond(rows, columns)) {
+                        Screen.printBoard(board);
+                        Screen.winMsg();
                         break;
                     }
-                }*/
+                }
+
             } else if (action == 'F' || action == 'f') {
                 int columns = Screen.getColumnCords();
                 int rows = Screen.getRowCords();

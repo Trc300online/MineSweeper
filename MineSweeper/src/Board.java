@@ -16,17 +16,17 @@ public class Board {
     }
 
     public void placeBombs(Tile[][] gameBoard) {
-        /*int bombas = (columnsPrint * rowsPrint)/3;
+        int bombas = (columnsPrint * rowsPrint)/3;
         int count = 0;
 
         while (count != bombas) {
             int k = new Random().nextInt(rowsPrint);
-            int l = new Random().nextInt(columnsPrint);*/
-        if (!gameBoard[2][0].isBomb) {
-            gameBoard[2][0].setBomb();
-            //count++;
+            int l = new Random().nextInt(columnsPrint);
+        if (!gameBoard[k][l].isBomb) {
+            gameBoard[k][l].setBomb();
+            count++;
         }
-        //}
+        }
     }
 
     public void countBombAround() {
@@ -123,6 +123,23 @@ public class Board {
                 }
             }
         }
+    }
+
+    public boolean winCond(int rows, int columns) {
+        int count = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (gameBoard[i][j].isRevealed
+                        || gameBoard[i][j].isBomb) {
+                    count +=1;
+
+                }
+            }
+        }
+        if (count == columns * rows) {
+            return true;
+        }
+        return false;
     }
 }
         /*if (gameBoard[rows][columns].bombAround == 0) {
