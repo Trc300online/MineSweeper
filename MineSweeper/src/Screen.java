@@ -54,4 +54,8 @@ public class Screen {
     public static void gameOverMsg() {
         System.out.println("Heu trepitjat una mina, mala sort!!");
     }
+
+    public static void winMsg() {
+        System.out.println("Vicotria!! heu marcat totes les mines!!");
+    }
 }
