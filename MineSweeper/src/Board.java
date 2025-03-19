@@ -40,29 +40,17 @@ public class Board {
     }
 
     public void addNeighbours(int rows, int columns) {
-        if (validPosition(rows + 1, columns, gameBoard)) {
-            gameBoard[rows + 1][columns].bombAround += 1;
-        }
-        if (validPosition(rows + 1, columns + 1, gameBoard)) {
-            gameBoard[rows + 1][columns + 1].bombAround += 1;
-        }
-        if (validPosition(rows, columns + 1, gameBoard)) {
-            gameBoard[rows][columns + 1].bombAround += 1;
-        }
-        if (validPosition(rows - 1, columns + 1, gameBoard)) {
-            gameBoard[rows - 1][columns + 1].bombAround += 1;
-        }
-        if (validPosition(rows - 1, columns, gameBoard)) {
-            gameBoard[rows - 1][columns].bombAround += 1;
-        }
-        if (validPosition(rows - 1, columns - 1, gameBoard)) {
-            gameBoard[rows - 1][columns - 1].bombAround += 1;
-        }
-        if (validPosition(rows, columns - 1, gameBoard)) {
-            gameBoard[rows][columns - 1].bombAround += 1;
-        }
-        if (validPosition(rows + 1, columns - 1, gameBoard)) {
-            gameBoard[rows + 1][columns - 1].bombAround += 1;
+        for (int incFila = -1; incFila <= 1; incFila++) {
+            for (int incCol = -1; incCol <= 1; incCol++) {
+                int newRow = rows + incFila;
+                int newCol = columns + incCol;
+
+                if (validPosition(newRow, newCol, gameBoard)) {
+
+                    gameBoard[newRow][newCol].bombAround += 1;
+
+                }
+            }
         }
     }
 
