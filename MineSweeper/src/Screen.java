@@ -11,10 +11,15 @@ public class Screen {
     }
 
     public static int getRowPrintCords(){
-        int rowCords;
-        Scanner scanner2 = new Scanner(System.in);
-        System.out.println("Row: ");
-        rowCords = Integer.parseInt(scanner2.next());
+        int rowCords = 0;
+        try {
+            Scanner scanner2 = new Scanner(System.in);
+            System.out.println("Row: ");
+            rowCords = Integer.parseInt(scanner2.next());
+        } catch (NumberFormatException nfe) {
+            errorMng(2);
+            System.exit(0);
+        }
         return rowCords;
     }
 
@@ -27,10 +32,15 @@ public class Screen {
     }
 
     public static int getColumnPrintCords(){
-        int columnCords;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Column: ");
-        columnCords = Integer.parseInt(scanner.next());
+        int columnCords = 0;
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Column: ");
+            columnCords = Integer.parseInt(scanner.next());
+        } catch (NumberFormatException nfe) {
+            errorMng(2);
+            System.exit(0);
+        }
         return columnCords;
     }
 
@@ -57,5 +67,30 @@ public class Screen {
 
     public static void winMsg() {
         System.out.println("Vicotria!! heu marcat totes les mines!!");
+    }
+
+    public static int bombInfo() {
+        int bombs = 0;
+        try {
+            Scanner getBombs = new Scanner(System.in);
+            System.out.println("mines dins el tauler: ");
+            bombs = Integer.parseInt(getBombs.next());
+        } catch (NumberFormatException nfe) {
+            errorMng(2);
+            System.exit(0);
+        }
+        return bombs;
+    }
+
+    /////////////////////////////////////////////////////
+    public static void errorMng(int errorCode) {
+        if (errorCode == 1) {
+            System.out.println("mida del tauler incorrecte, ha de ser rows = 8...24 i columns = 8...32");
+            System.out.println("Detenent execució....");
+        }
+        if (errorCode == 2) {
+            System.out.println("Nomes se accepten numeros...");
+            System.out.println("Detenent execució....");
+        }
     }
 }

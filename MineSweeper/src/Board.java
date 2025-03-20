@@ -8,24 +8,37 @@ public class Board {
 
     public Board() {
         gameBoard = new Tile[rowsPrint][columnsPrint];
-        for (int i = 0; i < rowsPrint; i++) {
-            for (int j = 0; j < columnsPrint; j++) {
-                gameBoard[i][j] = new Tile();
+        int errorCode;
+        ///////////////////////////////////////////
+        if ((rowsPrint > 24 || columnsPrint > 32) || (rowsPrint < 8 || columnsPrint < 8)) {
+            Screen.errorMng(1);
+            System.exit(0);
+        } else {
+            //////////////////////////////////////////////
+            for (int i = 0; i < rowsPrint; i++) {
+                for (int j = 0; j < columnsPrint; j++) {
+                    gameBoard[i][j] = new Tile();
+                }
             }
         }
     }
 
     public void placeBombs(Tile[][] gameBoard) {
-        int bombas = (columnsPrint * rowsPrint)/3;
-        int count = 0;
+        int bombas = Screen.bombInfo();
+        if (bombas < 1 || bombas > ((rowsPrint * columnsPrint)/3)) {
+            Screen.errorMng(3);
+            System.exit(0);
+        } else {
+            int count = 0;
 
-        while (count != bombas) {
-            int k = new Random().nextInt(rowsPrint);
-            int l = new Random().nextInt(columnsPrint);
-        if (!gameBoard[k][l].isBomb) {
-            gameBoard[k][l].setBomb();
-            count++;
-        }
+            while (count != bombas) {
+                int k = new Random().nextInt(rowsPrint);
+                int l = new Random().nextInt(columnsPrint);
+                if (!gameBoard[k][l].isBomb) {
+                    gameBoard[k][l].setBomb();
+                    count++;
+                }
+            }
         }
     }
 
@@ -74,7 +87,7 @@ public class Board {
     }
 
     public boolean flaggeable(int rows, int columns) {
-        if (!gameBoard[columns][rows].isRevealed) {
+        if (!gameBoard[rows][columns].isRevealed) {
             return true;
         }
         return false;
@@ -113,10 +126,10 @@ public class Board {
         }
     }
 
-    public boolean winCond(int rows, int columns) {
+    public boolean winCond() {
         int count = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < rowsPrint; i++) {
+            for (int j = 0; j < columnsPrint; j++) {
                 if (gameBoard[i][j].isRevealed
                         || gameBoard[i][j].isBomb) {
                     count +=1;
@@ -124,7 +137,7 @@ public class Board {
                 }
             }
         }
-        if (count == columns * rows) {
+        if (count == columnsPrint * rowsPrint) {
             return true;
         }
         return false;

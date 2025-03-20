@@ -37,7 +37,7 @@ public class Game {
                         board.gameBoard[rows][columns].reveal();
                         board.revealNeighbours(rows, columns);
 
-                        if (board.winCond(rows, columns)) {
+                        if (board.winCond()) {
                             Screen.printBoard(board);
                             Screen.winMsg();
                             gameContinues = false;
