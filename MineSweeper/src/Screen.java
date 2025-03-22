@@ -3,10 +3,15 @@ import java.util.Scanner;
 public class Screen {
 
     public static int getColumnCords(){
-        int rowCords;
-        Scanner scanner2 = new Scanner(System.in);
-        System.out.println("Column: ");
-        rowCords = Integer.parseInt(scanner2.next()) - 1;
+        int rowCords = 1;
+        try {
+            Scanner scanner2 = new Scanner(System.in);
+            System.out.println("Column: ");
+            rowCords = Integer.parseInt(scanner2.next()) - 1;
+        } catch (NumberFormatException nfe) {
+            errorMng(2);
+            System.exit(0);
+        }
         return rowCords;
     }
 
@@ -24,10 +29,15 @@ public class Screen {
     }
 
     public static int getRowCords(){
-        int columnCords;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Row: ");
-        columnCords = Integer.parseInt(scanner.next()) - 1;
+        int columnCords = 1;
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Row: ");
+            columnCords = Integer.parseInt(scanner.next()) - 1;
+        } catch (NumberFormatException nfe) {
+            errorMng(2);
+            System.exit(0);
+        }
         return columnCords;
     }
 
@@ -91,6 +101,14 @@ public class Screen {
         if (errorCode == 2) {
             System.out.println("Nomes se accepten numeros...");
             System.out.println("Detenent execució....");
+        }
+        if (errorCode == 3) {
+            System.out.println("Les mines han de ser 1 fins a 1/3 de les caselles");
+            System.out.println("Detenent execució....");
+        }
+        if (errorCode == 4) {
+            System.out.println("Una de les caselles introduides esta fora del tauler...");
+            System.out.println("Tornau a intentar");
         }
     }
 }

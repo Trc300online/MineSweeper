@@ -24,24 +24,28 @@ public class Game {
                     int columns = Screen.getColumnCords();
                     int rows = Screen.getRowCords();
 
-                    if (board.gameOver(rows, columns)){
+                    if (board.validPosition(rows, columns, board.gameBoard)) {
+                        if (board.gameOver(rows, columns)) {
 
-                        board.revealAll();
-                        Screen.printBoard(board);
-                        Screen.gameOverMsg();
-                        gameContinues = false;
-                        break;
-                    }
-                    if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
-
-                        board.gameBoard[rows][columns].reveal();
-                        board.revealNeighbours(rows, columns);
-
-                        if (board.winCond()) {
+                            board.revealAll();
                             Screen.printBoard(board);
-                            Screen.winMsg();
+                            Screen.gameOverMsg();
                             gameContinues = false;
+                            break;
                         }
+                        if (board.revealable(rows, columns) && !board.gameBoard[rows][columns].isFlagged) {
+
+                            board.gameBoard[rows][columns].reveal();
+                            board.revealNeighbours(rows, columns);
+
+                            if (board.winCond()) {
+                                Screen.printBoard(board);
+                                Screen.winMsg();
+                                gameContinues = false;
+                            }
+                        }
+                    } else {
+                        Screen.errorMng(4);
                     }
                     break;
 
@@ -51,9 +55,13 @@ public class Game {
                     int columnsF = Screen.getColumnCords();
                     int rowsF = Screen.getRowCords();
 
-                    if (board.flaggeable(rowsF, columnsF)) {
+                    if (board.validPosition(rowsF, columnsF, board.gameBoard)) {
+                        if (board.flaggeable(rowsF, columnsF)) {
 
-                        board.gameBoard[rowsF][columnsF].toggleFlag();
+                            board.gameBoard[rowsF][columnsF].toggleFlag();
+                        }
+                    } else {
+                        Screen.errorMng(4);
                     }
                     break;
             }

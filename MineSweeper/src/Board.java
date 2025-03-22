@@ -68,7 +68,7 @@ public class Board {
     }
 
     public boolean validPosition(int row, int col, Tile[][] gameBoard) {
-        return col >= 0 && col < gameBoard.length && row >= 0 && row < gameBoard[col].length;
+        return row >= 0 && row < gameBoard.length && col >= 0 && col < gameBoard[0].length;
     }
 
     public boolean gameOver(int rows, int columns) {
@@ -80,7 +80,7 @@ public class Board {
     }
 
     public boolean revealable(int rows, int columns) {
-        if (!gameBoard[columns][rows].isRevealed) {
+        if (!gameBoard[rows][columns].isRevealed) {
             return true;
         }
         return false;
@@ -111,7 +111,8 @@ public class Board {
 
                     if (validPosition(newRow, newCol, gameBoard)
                             && !gameBoard[newRow][newCol].isBomb
-                            && !gameBoard[newRow][newCol].isRevealed) {
+                            && !gameBoard[newRow][newCol].isRevealed
+                            && !gameBoard[newRow][newCol].isFlagged) {
 
                         gameBoard[newRow][newCol].reveal();
 
