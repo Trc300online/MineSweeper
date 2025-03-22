@@ -9,12 +9,10 @@ public class Board {
     public Board() {
         gameBoard = new Tile[rowsPrint][columnsPrint];
         int errorCode;
-        ///////////////////////////////////////////
         if ((rowsPrint > 24 || columnsPrint > 32) || (rowsPrint < 8 || columnsPrint < 8)) {
             Screen.errorMng(1);
             System.exit(0);
         } else {
-            //////////////////////////////////////////////
             for (int i = 0; i < rowsPrint; i++) {
                 for (int j = 0; j < columnsPrint; j++) {
                     gameBoard[i][j] = new Tile();

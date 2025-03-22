@@ -92,7 +92,6 @@ public class Screen {
         return bombs;
     }
 
-    /////////////////////////////////////////////////////
     public static void errorMng(int errorCode) {
         if (errorCode == 1) {
             System.out.println("mida del tauler incorrecte, ha de ser rows = 8...24 i columns = 8...32");
