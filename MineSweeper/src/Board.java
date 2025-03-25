@@ -8,7 +8,6 @@ public class Board {
 
     public Board() {
         gameBoard = new Tile[rowsPrint][columnsPrint];
-        int errorCode;
         if ((rowsPrint > 24 || columnsPrint > 32) || (rowsPrint < 8 || columnsPrint < 8)) {
             Screen.errorMng(1);
             System.exit(0);
@@ -56,7 +55,7 @@ public class Board {
                 int newRow = rows + incFila;
                 int newCol = columns + incCol;
 
-                if (validPosition(newRow, newCol, gameBoard)) {
+                if (validPosition(newRow, newCol)) {
 
                     gameBoard[newRow][newCol].bombAround += 1;
 
@@ -65,7 +64,7 @@ public class Board {
         }
     }
 
-    public boolean validPosition(int row, int col, Tile[][] gameBoard) {
+    public boolean validPosition(int row, int col) {
         return row >= 0 && row < gameBoard.length && col >= 0 && col < gameBoard[0].length;
     }
 
@@ -107,7 +106,7 @@ public class Board {
                     int newRow = rows + incFila;
                     int newCol = columns + incCol;
 
-                    if (validPosition(newRow, newCol, gameBoard)
+                    if (validPosition(newRow, newCol)
                             && !gameBoard[newRow][newCol].isBomb
                             && !gameBoard[newRow][newCol].isRevealed
                             && !gameBoard[newRow][newCol].isFlagged) {

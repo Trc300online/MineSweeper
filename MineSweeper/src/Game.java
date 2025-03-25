@@ -24,7 +24,7 @@ public class Game {
                     int columns = Screen.getColumnCords();
                     int rows = Screen.getRowCords();
 
-                    if (board.validPosition(rows, columns, board.gameBoard)) {
+                    if (board.validPosition(rows, columns)) {
                         if (board.gameOver(rows, columns)) {
 
                             board.revealAll();
@@ -55,7 +55,7 @@ public class Game {
                     int columnsF = Screen.getColumnCords();
                     int rowsF = Screen.getRowCords();
 
-                    if (board.validPosition(rowsF, columnsF, board.gameBoard)) {
+                    if (board.validPosition(rowsF, columnsF)) {
                         if (board.flaggeable(rowsF, columnsF)) {
 
                             board.gameBoard[rowsF][columnsF].toggleFlag();
